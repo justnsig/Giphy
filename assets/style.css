@@ -15,6 +15,11 @@ body {
     background-image: url(../assets/other.jpg);
     color: azure;
     font-size: 24px;
-    
+}
+h1 {
+    color: black;
+}
+.lead {
+    color: black;
 }
 

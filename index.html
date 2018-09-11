@@ -1,4 +1,4 @@
-<!DOCTYPE <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Getting Giphy With It!</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-    crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../Giphy/assets/reset.css">    
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../Giphy/assets/reset.css">
     <link rel="stylesheet" type="text/css" href="../Giphy/assets/style.css">
-    
+
 </head>
 
 <body>
@@ -51,7 +51,8 @@
 
             for (var i = 0; i < giphs.length; i++) {
                 var giph = giphs[i];
-                var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + giph + "&api_key=vC5rGHF1v14E40XG5jmYi3jtLwpRdLsn&limit=5";
+                var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + giph + 
+                "&api_key=vC5rGHF1v14E40XG5jmYi3jtLwpRdLsn&limit=5";
 
 
                 $.ajax({
@@ -102,10 +103,12 @@
         $("#push").on("click", function (event) {
             event.preventDefault();
             var input = $('#giph-input').val();
+
             giphs.push(input);
+
             renderButtons();
             console.log(input);
-
+            
         });
         renderButtons();
     </script>
