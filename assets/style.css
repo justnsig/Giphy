@@ -12,7 +12,7 @@ button {
     text-align: center;
 }
 body {
-    background-image: url(/assets/other.jpg);
+    background-image: url(../assets/other.jpg);
     color: azure;
     font-size: 24px;
     
