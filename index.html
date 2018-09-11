@@ -1,0 +1,114 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Getting Giphy With It!</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div id="jumbo" class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Giph Generator</h1>
+            <p class="lead">Find your own giph, just type in what you want to see!</p>
+        </div>
+    </div>
+    <div class="container">
+        <form id="giphSearch">
+            <label for="find"></label>
+            <input type="text" id="giph-input">
+
+            <input id="push" type="submit" value="New giph button!">
+        </form>
+
+        <br>
+        <div id="giphs"></div>
+
+        <br>
+        <div id="pics">
+            <div id="rating">
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        var giphs = ["cat", "dogs", "frogs", "rats", "eagles", "lion", "cows"]
+        var queryURL = "http://api.giphy.com/v1/gifs/search?q=cats&api_key=vC5rGHF1v14E40XG5jmYi3jtLwpRdLsn&limit=10";
+
+        function renderButtons() {
+
+            $('#pics').empty();
+            $('#giphs').empty();
+
+            for (var i = 0; i < giphs.length; i++) {
+                var giph = giphs[i];
+                var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + giph + "&api_key=vC5rGHF1v14E40XG5jmYi3jtLwpRdLsn&limit=5";
+
+
+                $.ajax({
+                    url: queryURL,
+                    method: "GET"
+                })
+                    .then(function (response) {
+                        console.log(response);
+
+                        console.log(response.data[0].images.downsized_still.url);
+
+                        var images = $('<img>');
+
+                        var ratings = response.data[0].rating;
+
+                        var p = $('<p>');
+
+                        console.log(ratings);
+
+                        images.attr("src", response.data[0].images.downsized_still.url);
+
+                        p.attr("src", response.data[0].rating)
+
+                        p.text(ratings);
+
+                        $('#rating').append("Rating " + ratings);
+
+                        console.log(response.data[0].rating)
+
+                        //images.attr("src", gif.images.fixed_height_still.url);
+
+                        //images.attr("data-still", gif.images.fixed_height_still.url);
+
+                        //images.attr("data-animate", gif.images.fixed_height.url);
+
+                        //images.attr("data-state", "still");
+
+                        $('#pics').append(images);
+
+                        $('#pics').click(function () {
+                            images.attr("src", response.data[0].images.original.url);
+                        });
+
+                    });
+                $('#giphs').append('<button>' + giphs[i] + '</button>');
+            }
+        }
+        $("#push").on("click", function (event) {
+            event.preventDefault();
+            var input = $('#giph-input').val();
+            giphs.push(input);
+            renderButtons();
+            console.log(input);
+
+        });
+        renderButtons();
+    </script>
+
+
+</body>
+
+</html>
